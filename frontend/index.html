@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>INSIGHT-X AIOps Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <span class="logo">INSIGHT-X</span>
+  <span class="live">● LIVE</span>
+  <select id="serverSelect">
+  <option value="auth">Auth Service</option>
+  <option value="payment">Payment Service</option>
+  <option value="db">DB Cluster</option>
+  <option value="cache">Cache Node</option>
+</select>
+
+</div>
+
+<div class="grid">
+
+  <!-- Risk Panel -->
+  <div class="panel large">
+    <h3>Incident Risk</h3>
+    <div id="risk" class="risk-value">--</div>
+    <div id="prob" class="prob">--</div>
+
+    <svg width="140" height="140">
+      <circle cx="70" cy="70" r="60" stroke="#1f2937" stroke-width="10" fill="none"/>
+      <circle id="ring" cx="70" cy="70" r="60"
+        stroke="#38bdf8" stroke-width="10"
+        fill="none"
+        stroke-dasharray="377"
+        stroke-dashoffset="377"
+        transform="rotate(-90 70 70)"/>
+    </svg>
+  </div>
+
+  <div class="panel status-strip">
+  <div class="status-item">
+    <span>Status</span>
+    <strong class="ok">STABLE</strong>
+  </div>
+
+  <div class="status-item">
+    <span>Active Alerts</span>
+    <strong>0</strong>
+  </div>
+
+  <div class="status-item">
+    <span>Services Impacted</span>
+    <strong>1</strong>
+  </div>
+
+  <div class="status-item">
+    <span>Last Update</span>
+    <strong id="lastUpdate">--:--:--</strong>
+  </div>
+</div>
+
+
+<div class="panel timeline">
+  <h3>Incident Timeline</h3>
+  <div id="timeline"></div>
+</div>
+
+<div class="panel alert">
+  <h3>Alert Status</h3>
+  <div id="alertStatus" class="alert-ok">
+    ✅ No active alerts
+  </div>
+</div>
+
+<div id="serviceContext" class="service-context">
+  Monitoring: AUTH SERVICE
+</div>
+
+
+
+<div class="panel correlation">
+  <h3>Metric Correlation (last ~2 min)</h3>
+
+  <div class="sparkline">
+    <span>CPU</span>
+    <canvas id="cpuSpark"></canvas>
+  </div>
+
+  <div class="sparkline">
+    <span>Memory</span>
+    <canvas id="memSpark"></canvas>
+  </div>
+
+  <div class="sparkline">
+    <span>Errors</span>
+    <canvas id="errSpark"></canvas>
+  </div>
+
+  <div class="sparkline">
+    <span>Network</span>
+    <canvas id="netSpark"></canvas>
+  </div>
+</div>
+
+  <!-- Explainability Panel -->
+  <div class="panel">
+    <h3>Top Contributors</h3>
+    <div id="reasons"></div>
+  </div>
+
+  <div class="panel">
+  <h3>Service Health KPIs</h3>
+
+  <div class="kpi">
+    <span>Avg CPU (5m)</span>
+    <strong id="kpiCpu">--%</strong>
+  </div>
+
+
+
+  <div class="kpi">
+    <span>Avg Memory</span>
+    <strong id="kpiMemory">--%</strong>
+  </div>
+
+  <div class="kpi">
+    <span>Error Rate</span>
+    <strong id="kpiErrors">--</strong>
+  </div>
+
+  <div class="kpi">
+    <span>Throughput</span>
+    <strong id="kpiThroughput">--/min</strong>
+  </div>
+</div>
+
+
+  <!-- Summary Panel -->
+  <div class="panel">
+    <h3>AI Explanation</h3>
+    <p id="summary">Waiting for data…</p>
+  </div>
+
+  <div class="panel">
+  <h3>Risk Over Time</h3>
+   <div class="legend">
+    <span class="low">LOW</span>
+    <span class="medium">MEDIUM</span>
+    <span class="high">HIGH</span>
+  </div>
+
+  <canvas id="riskChart"></canvas>
+</div>
+
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
